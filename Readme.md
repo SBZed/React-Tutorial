@@ -69,30 +69,30 @@ class Tweet {
 -   for custmized configuration setup use `npm run eject`.
 -   open up `App.js` file
 
-    ```js
-    render() {
-        return (
-        // Start JavaScript XML
-        <div className="App">
-            <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-                Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Learn React
-            </a>
-            </header>
-        </div>
-        // End JavaScript XML
-        );
-    }
-    ```
+```js
+render() {
+    return (
+    // Start JavaScript XML
+    <div className="App">
+        <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+            Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Learn React
+        </a>
+        </header>
+    </div>
+    // End JavaScript XML
+    );
+}
+```
 
 -   What render function returning (contain inside the return()) is not string nor HTML. It's **JSX(Javascript XML)**.
 
