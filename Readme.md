@@ -1,17 +1,31 @@
 # React - Reacts to state changes
+
 ## Index
+
 #### 1. Introduction
-   - 1.1. Setup
-   - 1.2. Component
-   - 1.3. First React App
-   - 1.4. Props (Passing Data to component)
-   - 1.5. Fetch data from API
-   - 1.6. State in react: `useState`
-   - 1.7. useEffect: built-in hook
+
+-   1.1. Setup
+-   1.2. Component
+-   1.3. First React App
+-   1.4. Props (Passing Data to component)
+-   1.5. Fetch data from API
+-   1.6. State in react: `useState`
+-   1.7. useEffect: built-in hook
+
 #### 2. React Router
-#### 3. Resource
+
+#### 3. State Management
+
+-   3.1. Need of State Management
+-   3.2. Setup for Context
+-   3.3. Usage of context
+-   3.4. Update value in context
+-   3.5. Pros and Cons
+
+#### 4. Resource
 
 ## 1. Intro
+
 -   A javascript library for building user interfaces
 -   By facebook 2011
 -   It's Library
@@ -293,6 +307,116 @@ function Nav() {
 	);
 }
 ```
+
+## 3. State Management
+
+### 3.1. Need of State Management
+
+```js
+<div className='App'>
+	<Nav />
+	<MovieList />
+</div>
+```
+
+-   Using prop you can only pass down value through component, but what if you need same data in adjacent component. like movieList data from `MovieList` component need into `Nav` component.
+-   this is where **State management** come into picture.
+
+### 3.2. Setup for Context
+
+-   We start with creating context file e.g. `MovieContext.js` which content all movies data
+
+```js
+import React, { useState, createContext } from 'react';
+
+export const MovieContext = createContext(); // initialize context
+
+export const MovieProvider = (props) => {
+	const [movies, setMovies] = useState([
+		{
+			name: 'Harry Potter',
+			price: '$10',
+			id: 234,
+		},
+		// many movie data
+	]);
+
+	return (
+		<MovieContext.Provider value={[movies, setMovies]}>{props.children}</MovieContext.Provider>
+	);
+};
+```
+
+-   Whenever we want to use information from `MovieContext.js` we gonna use **MovieContext**.
+-   **MovieProvider** just gonna provide th information to the different component.
+-   And we need to wrap this `MovieProvider` around all the component that we want to give that ability to access that state.
+-   `props.children` render all component that wrap arround `<MovieContext.Provider>` attribute. e.g.
+
+### 3.3. Usage of context
+
+```js
+import { MovieProvider } from './MovieContext';
+import AddMovie from './AddMovie';
+
+function App() {
+	return (
+		<MovieProvider>
+			<div className='App'>
+				<Nav />
+				<AddMovie />
+				<MovieList />
+			</div>
+		</MovieProvider>
+	);
+}
+```
+
+-   here as you can see, Navbar, add-movie, and movielisting component need movie data.
+
+### 3.4. Update value in context
+
+-   For now we use centralized data in MovieContext. now how to change and update it.
+-   let say we need to add movies in MovieContext.
+
+```js
+import React, { useState, useContext } from 'react';
+import { MovieContext } from './MovieContext';
+
+const AddMovie = () => {
+	const [name, setName] = useState('');
+	const [price, setPrice] = useState('');
+	const [movies, setMovies] = useContext(MovieContext);
+
+	const updateName = (e) => {
+		setName(e.target.value);
+	};
+
+	const updatePrice = (e) => {
+		setPrice(e.target.value);
+	};
+
+	const addMovie = (e) => {
+		e.preventDefault();
+		// Here we updating value in MovieContext
+		setMovies((prevMovies) => [...prevMovies, { name: name, price: price }]);
+	};
+
+	return (
+		<form onSubmit={addMovie}>
+			<input type='text' name='name' value={name} onChange={updateName} />
+			<input type='text' name='price' value={price} onChange={updatePrice} />
+			<button type='submit'>Add Movie</button>
+		</form>
+	);
+};
+
+export default AddMovie;
+```
+
+### 3.5. Pros and Cons:
+
+-   **Pros**: It's really good if we wan to just render out information.
+-   **Cons**: If we can to change data in context, problem is every time we update the code in our useContext, all components are going to re-render.
 
 ## 9. Resource
 
