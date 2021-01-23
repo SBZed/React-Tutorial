@@ -4,17 +4,17 @@
 
 ## Index
 
-    1. Introduction
-        1.1. Setup
-        1.2. Component
-        1.3. First React App
-        1.4. Props (Passing Data to component)
-        1.5. Fetch data from API
-        1.6. State in react: `useState`
-        1.7. useEffect: built-in hook
-    2. React Router
+1. Introduction
+   1.1. Setup
+   1.2. Component
+   1.3. First React App
+   1.4. Props (Passing Data to component)
+   1.5. Fetch data from API
+   1.6. State in react: `useState`
+   1.7. useEffect: built-in hook
+2. React Router
 
-    9. Resource
+3. Resource
 
 ## 1. Intro
 
@@ -27,16 +27,12 @@
     -   making sure that the view is in sync with the state.
 -   beacause of this react have very few API. When building application, we need to other libraries for:
     -   Routing
-    -   calling HTTP servies
-    -   etc.
+    -   calling HTTP servies, etc.
 
 ### 1.1. Setup
 
 -   install nodeJs.
--   then install create-react-app
-    ```sh
-    npm i -g create-react-app
-    ```
+-   then install create-react-app `npm i -g create-react-app`
 -   Id using VS Code, install `Simple React Snippets` extension.
 
 ### 1.2. Component
@@ -117,8 +113,6 @@ A[JavaScript XML] --> B((Babel))
 B --> C[Plain JavaScript]
 ```
 
--   go to
-
 ### 1.4. Props (Passing Data to component)
 
 -   In `App.js`.
@@ -193,7 +187,7 @@ function App() {
 }
 ```
 
-### 1.6. State in react: `useState`
+### 1.6. State in react: useState
 
 ```js
 import React, { useEffect, useState } from 'react';
@@ -308,4 +302,5 @@ function Nav() {
 
 ## 9. Resource
 
--   [React Tutorial for Beginners](https://www.youtube.com/watch?v=Ke90Tje7VS0)
+-   [React Tutorial for Beginners: With Mosh](https://www.youtube.com/watch?v=Ke90Tje7VS0)
+-   [React Tutorial for Beginners Playlist: Dev Ed](https://www.youtube.com/playlist?list=PLDyQo7g0_nsVHmyZZpVJyFn5ojlboVEhE)
