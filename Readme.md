@@ -1,23 +1,17 @@
-# React
-
-## Reacts to state changes
-
+# React - Reacts to state changes
 ## Index
-
-1. Introduction
-   1.1. Setup
-   1.2. Component
-   1.3. First React App
-   1.4. Props (Passing Data to component)
-   1.5. Fetch data from API
-   1.6. State in react: `useState`
-   1.7. useEffect: built-in hook
-2. React Router
-
-3. Resource
+#### 1. Introduction
+   - 1.1. Setup
+   - 1.2. Component
+   - 1.3. First React App
+   - 1.4. Props (Passing Data to component)
+   - 1.5. Fetch data from API
+   - 1.6. State in react: `useState`
+   - 1.7. useEffect: built-in hook
+#### 2. React Router
+#### 3. Resource
 
 ## 1. Intro
-
 -   A javascript library for building user interfaces
 -   By facebook 2011
 -   It's Library
