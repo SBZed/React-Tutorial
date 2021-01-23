@@ -68,6 +68,7 @@ class Tweet {
 -   this will create application with zero configurartion setup
 -   for custmized configuration setup use `npm run eject`.
 -   open up `App.js` file
+
     ```js
     render() {
         return (
@@ -92,6 +93,7 @@ class Tweet {
         );
     }
     ```
+
 -   What render function returning (contain inside the return()) is not string nor HTML. It's **JSX(Javascript XML)**.
 
 ```mermaid
