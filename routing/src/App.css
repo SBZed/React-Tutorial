@@ -1,0 +1,26 @@
+.App {
+	text-align: center;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 10vh;
+	background: rgb(36, 51, 56);
+	color: white;
+}
+
+.nav-links {
+	width: 40%;
+	list-style: none;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+img {
+	background: gainsboro;
+	height: 600px;
+	width: 600px;
+}
