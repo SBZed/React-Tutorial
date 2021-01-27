@@ -29,7 +29,11 @@
 -   4.3. How to Proceed with `react-redux` library
 -   4.4. How to access value from the store(Globalized state)
 
-#### 5. Another way of using react
+#### 5. From the scratch
+
+-   5.1. Another way of using react
+-   5.2. JSX
+-   5.3. Small Quirks in JSX
 
 #### 6. Resource
 
@@ -69,7 +73,7 @@
     -   we don't have to change and manipulate DOM directly. (e.g. we don't need `document`, `query`, `$`, `queryselector`, `EventListener`)
     -   when components get updates, Instead of changing the whole DOM, react changes only part of DOM which responsible for a component.
 
-```js
+```jsx
 class Tweet {
 	state = {};
 	render() {
@@ -97,7 +101,7 @@ class Tweet {
 -   for customized configuration setup use `npm run eject`.
 -   open up the `App.js` file
 
-```js
+```jsx
 render() {
     return (
     // Start JavaScript XML
@@ -134,7 +138,7 @@ B --> C[Plain JavaScript]
 
 -   In `App.js`.
 
-```js
+```jsx
 import React from 'react';
 import Recipe from './Recipe';
 
@@ -160,7 +164,7 @@ export default App;
 
 -   In child elements `Recipe.js`
 
-```js
+```jsx
 import React from 'react';
 
 const Recipe = ({ title, calories, image, ingredients }) => {
@@ -183,7 +187,7 @@ export default Recipe;
 
 ### 1.5. Fetch data from API
 
-```js
+```jsx
 function App() {
 	const APP_ID = '1de4a0dd';
 	const APP_KEY = '00e28a18b9433a59eec5eedd973a70ab';
@@ -206,7 +210,7 @@ function App() {
 
 ### 1.6. State in react: useState
 
-```js
+```jsx
 import React, { useEffect, useState } from 'react';
 
 function App() {
@@ -238,7 +242,7 @@ export default App;
 
 -   When the first time our page renders, it going to run this effect. After every time, something re-render on our page, it also going to run.
 
-```js
+```jsx
 useEffect(() => {
 	console.log('Effect has been run');
 });
@@ -246,7 +250,7 @@ useEffect(() => {
 
 -   if you want to render only once when the first time page renders, give an empty array as a second argument to useEffect.
 
-```js
+```jsx
 useEffect(() => {
 	console.log('Effect has been run');
 }, []);
@@ -254,7 +258,7 @@ useEffect(() => {
 
 -   if you want to run this effect on some variable change, added that variable into the empty array. like `counter` in the below example.
 
-```js
+```jsx
 useEffect(() => {
 	console.log('Effect has been run');
 }, [counter]);
@@ -266,7 +270,7 @@ useEffect(() => {
 npm install react-router-dom
 ```
 
-```js
+```jsx
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 ```
 
@@ -274,7 +278,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 -   **Route**: Renders component based on URL.
 -   **Switch**: It kind of stop checking all route as soon as it goes to one and matches the URL. and only render mentions component
 
-```js
+```jsx
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -296,7 +300,7 @@ function App() {
 
 -   Let's look at how to navigate when you click on the button.
 
-```js
+```jsx
 import { Link } from 'react-router-dom';
 
 function Nav() {
@@ -321,7 +325,7 @@ function Nav() {
 
 ### 3.1. The need for State Management
 
-```js
+```jsx
 <div className='App'>
 	<Nav />
 	<MovieList />
@@ -335,7 +339,7 @@ function Nav() {
 
 -   We start with creating a context file e.g. `MovieContext.js` which contains all movies data
 
-```js
+```jsx
 import React, { useState, createContext } from 'react';
 
 export const MovieContext = createContext(); // initialize context
@@ -363,7 +367,7 @@ export const MovieProvider = (props) => {
 
 ### 3.3. Usage of context
 
-```js
+```jsx
 import { MovieProvider } from './MovieContext';
 import AddMovie from './AddMovie';
 
@@ -387,7 +391,7 @@ function App() {
 -   For now, we use centralized data in MovieContext. now how to change and update it.
 -   let say we need to add movies in MovieContext.
 
-```js
+```jsx
 import React, { useState, useContext } from 'react';
 import { MovieContext } from './MovieContext';
 
@@ -442,9 +446,9 @@ export default AddMovie;
 
 ### 4.2. How to Proceed with `redux` library
 
--   step 1. create action, it is a function that returns an object.
+-   Step 1. create action, it is a function that returns an object.
 
-```js
+```jsx
 const increment = () => {
 	return {
 		type: 'INCREMENT',
@@ -452,9 +456,9 @@ const increment = () => {
 };
 ```
 
--   step 2. Create Reducer, it's also function returning an object, but it takes state and action as parameters.
+-   Step 2. Create Reducer, it's also function returning an object, but it takes state and action as parameters.
 
-```js
+```jsx
 const counter = (state = 0, action) => {
 	switch (action.type) {
 		case 'INCREMENT':
@@ -465,16 +469,16 @@ const counter = (state = 0, action) => {
 };
 ```
 
--   step 3. do `import { createStore } from 'redux';`
--   step 4. create a globalized state. we need to pass reducer to createStore method. like `let store = createStore(counter);`
--   step 5. Dispatch the store with action. like `store.dispatch(increment());`
+-   Step 3. do `import { createStore } from 'redux';`
+-   Step 4. create a globalized state. we need to pass reducer to createStore method. like `let store = createStore(counter);`
+-   Step 5. Dispatch the store with action. like `store.dispatch(increment());`
 -   Let's understand what we did. first, we create a store that needs a reducer(`counter` here) as a parameter and the reducer needs action(`increment`) to run.
 -   Hence, we create an action(`increment`) which returns the name of the action.
 -   now reducer(`counter`) take that action(`increment`), check its name which `INCREMENT` here. and do modifications in the state according to name. like for increment action, reducer increases state by one.
 -   Above process is setup. Now to make changes in store we need to dispatch that store with action.
 -   after dispatching an action, the store passes that action to the counter assigned to the store. the counter checks for the name of an action, and make a change in store according to it.
 
-```js
+```jsx
 import { createStore } from 'redux';
 
 // ACTION - Increment
@@ -512,10 +516,10 @@ store.dispatch(decrement());
 
 ### 4.3. How to Proceed with `react-redux` library
 
--   1. create a separate folder for all reducers. same for actions.
--   2. write down all reducer code in a new file.`src\reducers\counter.js`
+-   create a separate folder for all reducers. same for actions.
+-   write down all reducer code in a new file.`src\reducers\counter.js`
 
-```js
+```jsx
 const counterReducer = (state = 0, action) => {
 	switch (action.type) {
 		case 'INCREMENT':
@@ -529,9 +533,9 @@ const counterReducer = (state = 0, action) => {
 export default counterReducer;
 ```
 
--   3. combine all reducers in `src\reducers\index.js`.
+-   combine all reducers in `src\reducers\index.js`.
 
-```js
+```jsx
 import counterReducer from './counter';
 import loggedReducer from './isLogged';
 import { combineReducers } from 'redux';
@@ -544,9 +548,9 @@ const allReducers = combineReducers({
 export default allReducers;
 ```
 
--   4. Then import all reducer in `src\index.js`.
+-   Then import all reducer in `src\index.js`.
 
-```js
+```jsx
 import { createStore } from 'redux';
 import allReducers from './reducers';
 // we don't need to added "./reducers/index". cuase webpack automatically gonna look at index.js file.
@@ -557,10 +561,10 @@ const store = createStore(
 );
 ```
 
--   5. `window.__REDUX_DEVTOOLS_EXTENSION__`: this is for checking values for different states in the chrome dev tool.
+-   `window.__REDUX_DEVTOOLS_EXTENSION__`: this is for checking values for different states in the chrome dev tool.
 -   Now is time to give access of state to all over the app (refer below code). using Provider we pass store data to App.
 
-```js
+```jsx
 import { Provider } from 'react-redux';
 
 ReactDOM.render(
@@ -577,7 +581,7 @@ ReactDOM.render(
 
 -   first, create actions in `src\actions\index.js`
 
-```js
+```jsx
 export const increment = (multipler) => {
 	return {
 		type: 'INCREMENT',
@@ -588,7 +592,7 @@ export const increment = (multipler) => {
 
 -   Now, let make changes in `src/app.js`
 
-```js
+```jsx
 import { useSelector } from 'react-redux';
 import { increment } from './actions';
 
@@ -603,7 +607,9 @@ function App() {
 }
 ```
 
-## 5. Another way of using react
+## 5. From the scratch
+
+### 5.1. Another way of using react
 
 -   Here we going to show you a very basic and simple way to create react app without huge boilerplate code generated by the react.
 -   We don't write react code this way, it's just to make you understand behind scenes.
@@ -619,7 +625,7 @@ function App() {
 -   Need to import external scripts like `react` and `react-dom`.
 -   We can generate any element (div, h1, etc) using react now.
 
-```js
+```jsx
 React.createElement(element_name, attribute_or_properties_name, content_in_element);
 // e.g.
 React.createElement('h1', { style: { color: 'red' } }, 'Hello H1');
@@ -627,7 +633,7 @@ React.createElement('h1', { style: { color: 'red' } }, 'Hello H1');
 
 -   now we need to render react code in HTML.
 
-```js
+```jsx
 ReactDOM.render(element_you_wanna_redner, place_you_wanna_render_it_out);
 //e.g. we
 ReactDOM.render(
@@ -638,7 +644,7 @@ ReactDOM.render(
 
 -   if we want more than one element.
 
-```js
+```jsx
 function App() {
 	return React.createElement('div', null, [
 		React.createElement('h1', null, 'Title'),
@@ -648,6 +654,83 @@ function App() {
 }
 
 ReactDOM.render(React.createElement(App), document.querySelector('#app'));
+```
+
+### 5.2. JSX
+
+-   It allows us to write HTML like code.
+-   Babel which take JSX code(HTML like code) and turns it into kind of vanilla react code (code we saw above).
+
+```jsx
+function App() {
+	return (
+		<div>
+			<Nav />
+			<Home />
+		</div>
+	);
+}
+
+function Nav() {
+	return (
+		<nav>
+			<h1>Logo</h1>
+			<ul>
+				<li>Home</li>
+				<li>Contact</li>
+				<li>About</li>
+			</ul>
+		</nav>
+	);
+}
+
+function Home() {
+	return (
+		<div>
+			<h2>Join Our Magic</h2>
+			<p>Harray Potter geeks REJOIC</p>
+			<button>Buy our shittt</button>
+		</div>
+	);
+}
+
+ReactDOM.render(<App />, document.querySelector('#app'));
+```
+
+### 5.3. Small Quirks in JSX
+
+-   In App -> return function, you may though you don't want to wrap connect of App into <div></div>. like example below.
+
+```jsx
+function App() {
+	return (
+		<Nav />
+		<Home />
+	);
+}
+```
+
+-   **But it's going to thorugh error.** You always need one parent div that's wrapping your content around. because we are passinng this code in return to `React.createElement()` function.
+-   **Fragment**: But there is way you can avoid having one single parent element, if you don't want `div`. which react come up with which is called "Fragment" (`<></>`). like
+
+```jsx
+function App() {
+	return (
+		<>
+			<Nav />
+			<Home />
+		</>
+	);
+}
+```
+
+-   It's like `ng-container` in angular.
+-   In JSX "class" property, replace by "className".
+
+```jsx
+<div>
+	<h1 className='text-dark'>Hello</h1>
+</div>
 ```
 
 ## 9. Resource
