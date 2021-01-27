@@ -713,7 +713,7 @@ function App() {
 -   **But it's going to thorugh error.** You always need one parent div that's wrapping your content around. because we are passinng this code in return to `React.createElement()` function.
 -   **Fragment**: But there is way you can avoid having one single parent element, if you don't want `div`. which react come up with which is called "Fragment" (`<></>`). like
 
-```jsx
+```js
 function App() {
 	return (
 		<>
