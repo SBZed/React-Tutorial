@@ -16,10 +16,10 @@
 
 #### 3. State Management
 
--   3.1. Need of State Management
+-   3.1. The need for State Management
 -   3.2. Setup for Context
 -   3.3. Usage of context
--   3.4. Update value in context
+-   3.4. Update value in the context
 -   3.5. Pros and Cons
 
 #### 4. Redux - State management tool
@@ -27,24 +27,24 @@
 -   4.1. Theory
 -   4.2. How to Proceed with `redux` library
 -   4.3. How to Proceed with `react-redux` library
--   4.4. How to access value from store(Globlized state)
+-   4.4. How to access value from the store(Globalized state)
 
-#### 5. Other way of using react
+#### 5. Another way of using react
 
 #### 6. Resource
 
 ## 1. Intro
 
 -   A javascript library for building user interfaces
--   By facebook 2011
+-   By Facebook 2011
 -   It's Library
 -   Angular is Framework
 -   React Do Only
     -   it takes care of rendering view and
     -   making sure that the view is in sync with the state.
--   beacause of this react have very few API. When building application, we need to other libraries for:
+-   because of this react has very few API. When building application, we need to other libraries for:
     -   Routing
-    -   calling HTTP servies, etc.
+    -   calling HTTP services, etc.
 
 ### 1.1. Setup
 
@@ -55,19 +55,19 @@
 ### 1.2. Component
 
 -   Component basically contain `state` and `render()` method.
--   Each component is function which contains JS ans JSX(like html).
+-   Each component is the function that contains JS and JSX(like HTML).
 -   **state**: Data we want to display when component render
 -   **render**: responsible for describing what UI should look like
 -   **react element**
     -   output of render method
     -   simple plain javascript object that maps to DOM element
-    -   it's just plain javascript object that represents that DOM element in memory
+    -   it's just a plain javascript object that represents that DOM element in memory
 -   **Virtual DOM**:
-    -   React keeps lightweight representation of the DOM in memory which we referred to **Virtual DOM**.
+    -   React keeps a lightweight representation of the DOM in memory which we referred to **Virtual DOM**.
     -   it's cheap to create.
     -   we don't need to work with DOM API in browsers.
-    -   we don't have change and manipulate DOM directly.(e.g. we don't need `document`, `query`, `$`, `queryselector`, `EventListener`)
-    -   when component get updates, Instead of chaning whole DOM, react changes only part of DOM which responsible for component.
+    -   we don't have to change and manipulate DOM directly. (e.g. we don't need `document`, `query`, `$`, `queryselector`, `EventListener`)
+    -   when components get updates, Instead of changing the whole DOM, react changes only part of DOM which responsible for a component.
 
 ```js
 class Tweet {
@@ -91,11 +91,11 @@ class Tweet {
 -   It going to install react and third parties libraries like:
     -   Development server: lightweight
     -   Webpack: for bundling our files
-    -   Babel: Modern Javascript Compiler for compiling javascirpt code ([babel repl](https://babeljs.io/repl)).
+    -   Babel: Modern Javascript Compiler for compiling javascript code ([babel repl](https://babeljs.io/repl)).
     -   other tools
--   this will create application with zero configurartion setup
--   for custmized configuration setup use `npm run eject`.
--   open up `App.js` file
+-   this will create an application with a zero-configuration setup
+-   for customized configuration setup use `npm run eject`.
+-   open up the `App.js` file
 
 ```js
 render() {
@@ -236,7 +236,7 @@ export default App;
 
 -   By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed (we'll refer to it as our “effect”), and call it later after performing the DOM updates.
 
--   When first time our page renders, it going to run this effect. After everytime, something re-render on our page, it also going to run.
+-   When the first time our page renders, it going to run this effect. After every time, something re-render on our page, it also going to run.
 
 ```js
 useEffect(() => {
@@ -244,7 +244,7 @@ useEffect(() => {
 });
 ```
 
--   if you want to render only once when first time page render, give empty array as second argument to useEffect.
+-   if you want to render only once when the first time page renders, give an empty array as a second argument to useEffect.
 
 ```js
 useEffect(() => {
@@ -252,7 +252,7 @@ useEffect(() => {
 }, []);
 ```
 
--   if you want to run this effect on some variable change, added that variable into emtpy array. like `counter` in below example.
+-   if you want to run this effect on some variable change, added that variable into the empty array. like `counter` in the below example.
 
 ```js
 useEffect(() => {
@@ -270,7 +270,7 @@ npm install react-router-dom
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 ```
 
--   **BrowserRouter**: Use to added ability of handling routing in react. you need to wrap code which need routing ability, around `<Router></Router>`
+-   **BrowserRouter**: It use to the add ability of handling routing in react. you need to wrap code that needs routing ability, around `<Router></Router>`
 -   **Route**: Renders component based on URL.
 -   **Switch**: It kind of stop checking all route as soon as it goes to one and matches the URL. and only render mentions component
 
@@ -294,7 +294,7 @@ function App() {
 }
 ```
 
--   Let's look at how to navigate when you click on button.
+-   Let's look at how to navigate when you click on the button.
 
 ```js
 import { Link } from 'react-router-dom';
@@ -319,7 +319,7 @@ function Nav() {
 
 ## 3. State Management
 
-### 3.1. Need of State Management
+### 3.1. The need for State Management
 
 ```js
 <div className='App'>
@@ -328,12 +328,12 @@ function Nav() {
 </div>
 ```
 
--   Using prop you can only pass down value through component, but what if you need same data in adjacent component. like movieList data from `MovieList` component need into `Nav` component.
--   this is where **State management** come into picture.
+-   Using prop you can only pass down value through the component, but what if you need the same data in an adjacent component. like movieList data from `MovieList` component needs into `Nav` component.
+-   this is where **State management** comes into the picture.
 
 ### 3.2. Setup for Context
 
--   We start with creating context file e.g. `MovieContext.js` which content all movies data
+-   We start with creating a context file e.g. `MovieContext.js` which contains all movies data
 
 ```js
 import React, { useState, createContext } from 'react';
@@ -357,9 +357,9 @@ export const MovieProvider = (props) => {
 ```
 
 -   Whenever we want to use information from `MovieContext.js` we gonna use **MovieContext**.
--   **MovieProvider** just gonna provide th information to the different component.
--   And we need to wrap this `MovieProvider` around all the component that we want to give that ability to access that state.
--   `props.children` render all component that wrap arround `<MovieContext.Provider>` attribute. e.g.
+-   **MovieProvider** just gonna provide the information to the different components.
+-   And we need to wrap this `MovieProvider` around all the components that we want to give that ability to access that state.
+-   `props.children` render all component that wrap around `<MovieContext.Provider>` attribute. e.g.
 
 ### 3.3. Usage of context
 
@@ -380,11 +380,11 @@ function App() {
 }
 ```
 
--   here as you can see, Navbar, add-movie, and movielisting component need movie data.
+-   here as you can see, Navbar, add-movie, and movie listings components need movie data.
 
 ### 3.4. Update value in context
 
--   For now we use centralized data in MovieContext. now how to change and update it.
+-   For now, we use centralized data in MovieContext. now how to change and update it.
 -   let say we need to add movies in MovieContext.
 
 ```js
@@ -424,25 +424,25 @@ export default AddMovie;
 
 ### 3.5. Pros and Cons:
 
--   **Pros**: It's really good if we wan to just render out information.
--   **Cons**: If we can to change data in context, problem is every time we update the code in our useContext, all components are going to re-render.
+-   **Pros**: It's really good if we want to just render out information.
+-   **Cons**: If we can change data in context, the problem is every time we update the code in our useContext, all components are going to re-render.
 
 #### 4. Redux - State management tool
 
 -   `redux`: actual state management package.
--   `react redux`: gives us ability to connect react and redux.
+-   `react redux`: gives us the ability to connect react and redux.
 
 ### 4.1. Theory
 
 -   There are 4 things we need to understand:
-    1.  `STORE`: It's globalized state. basically all state data exist in isolated object called "STORE".
-    2.  `ACTION`: It describes what you want to do with store.
-    3.  `REDUCER`: describes how your action transform the state into next state. Basically on call of certain action, reducer check which action get called and according to that it modifiy state
+    1.  `STORE`: It's a globalized state. All state data exist in the isolated object called "STORE".
+    2.  `ACTION`: It describes what you want to do with the store.
+    3.  `REDUCER`: describes how your action transforms the state into the next state. Basically, on the call of a certain action, the reducer check which action gets called and according to that it modifies the state
     4.  `DISPATCH`: here we execute our actions. "Like dispatch 'specificAction' to 'specificReducer'"
 
 ### 4.2. How to Proceed with `redux` library
 
--   step 1. create action, it is basically funtion that return object.
+-   step 1. create action, it is a function that returns an object.
 
 ```js
 const increment = () => {
@@ -452,7 +452,7 @@ const increment = () => {
 };
 ```
 
--   step 2. Create Reducer, it's also function returning object, but it take state and action as parameters.
+-   step 2. Create Reducer, it's also function returning an object, but it takes state and action as parameters.
 
 ```js
 const counter = (state = 0, action) => {
@@ -466,13 +466,13 @@ const counter = (state = 0, action) => {
 ```
 
 -   step 3. do `import { createStore } from 'redux';`
--   step 4. create globalized state. we need to pass reducer to createStore method. like `let store = createStore(counter);`
+-   step 4. create a globalized state. we need to pass reducer to createStore method. like `let store = createStore(counter);`
 -   step 5. Dispatch the store with action. like `store.dispatch(increment());`
--   Let's understand what we did. first we create store which need reducer(`counter` here) as parameter and reducer need action(`increment`) to run.
--   Hence, we create action(`increment`) which return name of action.
--   now reducer(`counter`) take that action(`increment`), check it's name which `INCREMENT` here. and do modification in state according to name. like for increment action, reducer increase state by one.
+-   Let's understand what we did. first, we create a store that needs a reducer(`counter` here) as a parameter and the reducer needs action(`increment`) to run.
+-   Hence, we create an action(`increment`) which returns the name of the action.
+-   now reducer(`counter`) take that action(`increment`), check its name which `INCREMENT` here. and do modifications in the state according to name. like for increment action, reducer increases state by one.
 -   Above process is setup. Now to make changes in store we need to dispatch that store with action.
--   after dispatching action store pass that action to counter which assigned to store. counter check action name, and make change in store according to it.
+-   after dispatching an action, the store passes that action to the counter assigned to the store. the counter checks for the name of an action, and make a change in store according to it.
 
 ```js
 import { createStore } from 'redux';
@@ -512,8 +512,8 @@ store.dispatch(decrement());
 
 ### 4.3. How to Proceed with `react-redux` library
 
--   1. create separate folder for all reducers. same for actions.
--   2. write down all reducer code in new file.`src\reducers\counter.js`
+-   1. create a separate folder for all reducers. same for actions.
+-   2. write down all reducer code in a new file.`src\reducers\counter.js`
 
 ```js
 const counterReducer = (state = 0, action) => {
@@ -557,8 +557,8 @@ const store = createStore(
 );
 ```
 
--   5. `window.__REDUX_DEVTOOLS_EXTENSION__`: this is for checking values for different states in chrome dev tool.
--   Now is time to give access of state to all over app (refer below code). using Provider we pass store data to App.
+-   5. `window.__REDUX_DEVTOOLS_EXTENSION__`: this is for checking values for different states in the chrome dev tool.
+-   Now is time to give access of state to all over the app (refer below code). using Provider we pass store data to App.
 
 ```js
 import { Provider } from 'react-redux';
@@ -573,7 +573,7 @@ ReactDOM.render(
 );
 ```
 
-### 4.4. How to access value from store(Globlized state)
+### 4.4. How to access value from the store(Globalized state)
 
 -   first, create actions in `src\actions\index.js`
 
@@ -603,18 +603,18 @@ function App() {
 }
 ```
 
-## 5. Other way of using react
+## 5. Another way of using react
 
--   Here we going to show you very basic and simple way to create react app without huge bolierplate code genreated by react
+-   Here we going to show you a very basic and simple way to create react app without huge boilerplate code generated by the react.
 -   We don't write react code this way, it's just to make you understand behind scenes.
--   We need only `html` and `js` file.
--   On **HTML side**, We going to write only one div and basically, you inject all generated code from JS into this single div.
+-   We need only the `HTML` and `js` files.
+-   On the **HTML side**, We going to write only one div and basically, you inject all generated code from JS into this single div.
 
 ```html
 <div id="app"></div>
 ```
 
--   on **JavaScript Side**, you write code which generated html.
+-   on **JavaScript Side**, you write code that generated HTML.
 -   we gonna use [Code pen](https://codepen.io/pen/) to demonstrate this.
 -   Need to import external scripts like `react` and `react-dom`.
 -   We can generate any element (div, h1, etc) using react now.
@@ -625,7 +625,7 @@ React.createElement(element_name, attribute_or_properties_name, content_in_eleme
 React.createElement('h1', { style: { color: 'red' } }, 'Hello H1');
 ```
 
--   now we need to render react code in html.
+-   now we need to render react code in HTML.
 
 ```js
 ReactDOM.render(element_you_wanna_redner, place_you_wanna_render_it_out);
