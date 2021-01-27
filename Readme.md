@@ -22,7 +22,16 @@
 -   3.4. Update value in context
 -   3.5. Pros and Cons
 
-#### 4. Resource
+#### 4. Redux - State management tool
+
+-   4.1. Theory
+-   4.2. How to Proceed with `redux` library
+-   4.3. How to Proceed with `react-redux` library
+-   4.4. How to access value from store(Globlized state)
+
+#### 5. Other way of using react
+
+#### 6. Resource
 
 ## 1. Intro
 
@@ -417,6 +426,229 @@ export default AddMovie;
 
 -   **Pros**: It's really good if we wan to just render out information.
 -   **Cons**: If we can to change data in context, problem is every time we update the code in our useContext, all components are going to re-render.
+
+#### 4. Redux - State management tool
+
+-   `redux`: actual state management package.
+-   `react redux`: gives us ability to connect react and redux.
+
+### 4.1. Theory
+
+-   There are 4 things we need to understand:
+    1.  `STORE`: It's globalized state. basically all state data exist in isolated object called "STORE".
+    2.  `ACTION`: It describes what you want to do with store.
+    3.  `REDUCER`: describes how your action transform the state into next state. Basically on call of certain action, reducer check which action get called and according to that it modifiy state
+    4.  `DISPATCH`: here we execute our actions. "Like dispatch 'specificAction' to 'specificReducer'"
+
+### 4.2. How to Proceed with `redux` library
+
+-   step 1. create action, it is basically funtion that return object.
+
+```js
+const increment = () => {
+	return {
+		type: 'INCREMENT',
+	};
+};
+```
+
+-   step 2. Create Reducer, it's also function returning object, but it take state and action as parameters.
+
+```js
+const counter = (state = 0, action) => {
+	switch (action.type) {
+		case 'INCREMENT':
+			return state + 1;
+		case 'DECREMENT':
+			return state - 1;
+	}
+};
+```
+
+-   step 3. do `import { createStore } from 'redux';`
+-   step 4. create globalized state. we need to pass reducer to createStore method. like `let store = createStore(counter);`
+-   step 5. Dispatch the store with action. like `store.dispatch(increment());`
+-   Let's understand what we did. first we create store which need reducer(`counter` here) as parameter and reducer need action(`increment`) to run.
+-   Hence, we create action(`increment`) which return name of action.
+-   now reducer(`counter`) take that action(`increment`), check it's name which `INCREMENT` here. and do modification in state according to name. like for increment action, reducer increase state by one.
+-   Above process is setup. Now to make changes in store we need to dispatch that store with action.
+-   after dispatching action store pass that action to counter which assigned to store. counter check action name, and make change in store according to it.
+
+```js
+import { createStore } from 'redux';
+
+// ACTION - Increment
+const increment = () => {
+	return {
+		type: 'INCREMENT',
+	};
+};
+const decrement = () => {
+	return {
+		type: 'DECREMENT',
+	};
+};
+
+// REDUCER
+const counter = (state = 0, action) => {
+	switch (action.type) {
+		case 'INCREMENT':
+			return state + 1;
+		case 'DECREMENT':
+			return state - 1;
+	}
+};
+
+// STORE - globalized state
+let store = createStore(counter);
+
+store.subscribe(() => console.log(store.getState()));
+
+// DISPATCH
+store.dispatch(increment());
+store.dispatch(decrement());
+store.dispatch(decrement());
+```
+
+### 4.3. How to Proceed with `react-redux` library
+
+-   1. create separate folder for all reducers. same for actions.
+-   2. write down all reducer code in new file.`src\reducers\counter.js`
+
+```js
+const counterReducer = (state = 0, action) => {
+	switch (action.type) {
+		case 'INCREMENT':
+			return state + action.multipler;
+		case 'DECREMENT':
+			return state - 1;
+		default:
+			return state;
+	}
+};
+export default counterReducer;
+```
+
+-   3. combine all reducers in `src\reducers\index.js`.
+
+```js
+import counterReducer from './counter';
+import loggedReducer from './isLogged';
+import { combineReducers } from 'redux';
+
+const allReducers = combineReducers({
+	counter: counterReducer,
+	isLogged: loggedReducer,
+});
+
+export default allReducers;
+```
+
+-   4. Then import all reducer in `src\index.js`.
+
+```js
+import { createStore } from 'redux';
+import allReducers from './reducers';
+// we don't need to added "./reducers/index". cuase webpack automatically gonna look at index.js file.
+
+const store = createStore(
+	allReducers,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+```
+
+-   5. `window.__REDUX_DEVTOOLS_EXTENSION__`: this is for checking values for different states in chrome dev tool.
+-   Now is time to give access of state to all over app (refer below code). using Provider we pass store data to App.
+
+```js
+import { Provider } from 'react-redux';
+
+ReactDOM.render(
+	<React.StrictMode>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</React.StrictMode>,
+	document.getElementById('root')
+);
+```
+
+### 4.4. How to access value from store(Globlized state)
+
+-   first, create actions in `src\actions\index.js`
+
+```js
+export const increment = (multipler) => {
+	return {
+		type: 'INCREMENT',
+		payload: multipler,
+	};
+};
+```
+
+-   Now, let make changes in `src/app.js`
+
+```js
+import { useSelector } from 'react-redux';
+import { increment } from './actions';
+
+function App() {
+	const counter = useSelector((state) => state.counter);
+	return (
+		<div className='App'>
+			<h1>Counter {counter}</h1>
+			<button onClick={() => dispatch(increment((multipler = 5)))}>+</button>
+		</div>
+	);
+}
+```
+
+## 5. Other way of using react
+
+-   Here we going to show you very basic and simple way to create react app without huge bolierplate code genreated by react
+-   We don't write react code this way, it's just to make you understand behind scenes.
+-   We need only `html` and `js` file.
+-   On **HTML side**, We going to write only one div and basically, you inject all generated code from JS into this single div.
+
+```html
+<div id="app"></div>
+```
+
+-   on **JavaScript Side**, you write code which generated html.
+-   we gonna use [Code pen](https://codepen.io/pen/) to demonstrate this.
+-   Need to import external scripts like `react` and `react-dom`.
+-   We can generate any element (div, h1, etc) using react now.
+
+```js
+React.createElement(element_name, attribute_or_properties_name, content_in_element);
+// e.g.
+React.createElement('h1', { style: { color: 'red' } }, 'Hello H1');
+```
+
+-   now we need to render react code in html.
+
+```js
+ReactDOM.render(element_you_wanna_redner, place_you_wanna_render_it_out);
+//e.g. we
+ReactDOM.render(
+	React.createElement('h1', { style: { color: 'red' } }, 'Hello H1'),
+	document.querySelector('#app')
+);
+```
+
+-   if we want more than one element.
+
+```js
+function App() {
+	return React.createElement('div', null, [
+		React.createElement('h1', null, 'Title'),
+		React.createElement('h3', null, 'Subtitle'),
+		React.createElement('h3', { style: { color: 'red' } }, new Date().toLocaleString()),
+	]);
+}
+
+ReactDOM.render(React.createElement(App), document.querySelector('#app'));
+```
 
 ## 9. Resource
 
