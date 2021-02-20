@@ -8,38 +8,41 @@
     - 1.5. Spread and Rest Operators
     - 1.6. Destructuring
     - 1.7. Reference and primitive type
-1. Introduction
-    - 1.1. Setup
-    - 1.2. Component
-    - 1.3. First React App
-    - 1.4. Props (Passing Data to component)
-    - 1.5. Fetch data from API
-    - 1.6. State in react: `useState`
-    - 1.7. useEffect: built-in hook
-1. React Router
-1. State Management
+2. Introduction
+    - 1.1. Understanding base features and syntax
+    - 1.2. Setup
+    - 1.3. Component
+    - 1.4. First React App
+    - 1.5. Props (Passing Data to component)
+    - 1.6. Fetch data from API
+    - 1.7. State in react: `useState`
+    - 1.8. useEffect: built-in hook
+3. React Router
+4. State Management
     - 3.1. The need for State Management
     - 3.2. Setup for Context
     - 3.3. Usage of context
     - 3.4. Update value in the context
     - 3.5. Pros and Cons
-1. Redux - State management tool
+5. Redux - State management tool
     - 4.1. Theory
     - 4.2. How to Proceed with `redux` library
     - 4.3. How to Proceed with `react-redux` library
     - 4.4. How to access value from the store(Globalized state)
-1. From the scratch
+6. From the scratch
     - 5.1. Another way of using react
     - 5.2. JSX
     - 5.3. Small Quirks in JSX
     - 5.4. React Setup from scratch
-1. Resource
+7. Resource
 
 ## 1. Next-Gen JavaScript
 
 ### 1.1. `let and const`
 
-### 1.2. ES6 Arrow functions - no more issues with **this** keyword
+### 1.2. ES6 Arrow functions
+
+-   no more issues with **this** keyword
 
 ### 1.3. Exports and Imports
 
@@ -182,13 +185,28 @@ persion.printGender();
     -   Routing
     -   calling HTTP services, etc.
 
-### 1.1. Setup
+### 1.1. Understanding base features and syntax
+
+-   We need a more elaborate workflow for real projects, like:
+
+    1.  Dependency management (npm or yarn)
+    2.  Bundler (Webpack)
+    3.  Compiler (Babel + preset)
+    4.  Development server
+
+-   we can use `create-react-app` plugin for creating project with workflow mentained above.
+
+```cmd
+>>> create-react-app react-complete-guide --scripts-version 1.1.5
+```
+
+### 1.2. Setup
 
 -   install nodeJs.
 -   then install create-react-app `npm i -g create-react-app`
 -   Id using VS Code, install `Simple React Snippets` extension.
 
-### 1.2. Component
+### 1.3. Component
 
 -   Component basically contain `state` and `render()` method.
 -   Each component is the function that contains JS and JSX(like HTML).
@@ -214,7 +232,7 @@ class Tweet {
 }
 ```
 
-### 1.3. First React App
+### 1.4. First React App
 
 -   create app
     ```sh
@@ -266,7 +284,7 @@ A[JavaScript XML] --> B((Babel))
 B --> C[Plain JavaScript]
 ```
 
-### 1.4. Props (Passing Data to component)
+### 1.5. Props (Passing Data to component)
 
 -   In `App.js`.
 
@@ -317,7 +335,7 @@ const Recipe = ({ title, calories, image, ingredients }) => {
 export default Recipe;
 ```
 
-### 1.5. Fetch data from API
+### 1.6. Fetch data from API
 
 ```jsx
 function App() {
@@ -340,7 +358,7 @@ function App() {
 }
 ```
 
-### 1.6. State in react: useState
+### 1.7. State in react: useState
 
 ```jsx
 import React, { useEffect, useState } from 'react';
@@ -368,7 +386,7 @@ function App() {
 export default App;
 ```
 
-### 1.7. useEffect: built-in hook
+### 1.8. useEffect: built-in hook
 
 -   By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed (we'll refer to it as our “effect”), and call it later after performing the DOM updates.
 
