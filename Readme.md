@@ -37,11 +37,11 @@
 
 ## 1. Next-Gen JavaScript
 
-### 1. `let and const`
+### 1.1. `let and const`
 
-### 2. ES6 Arrow functions - no more issues with **this** keyword
+### 1.2. ES6 Arrow functions - no more issues with **this** keyword
 
-### 3. Exports and Imports
+### 1.3. Exports and Imports
 
     - Default exports
 
@@ -73,7 +73,7 @@
     import { clean as reset } from './utility.js';
     ```
 
-### 4. Classes, Properties, and Methods
+### 1.4. Classes, Properties, and Methods
 
 ```js
 class Human {
@@ -96,7 +96,7 @@ persion.printName(person);
 persion.printGender();
 ```
 
-### 5. Spread and Rest Operators
+### 1.5. Spread and Rest Operators
 
     1. Spread
 
@@ -121,7 +121,7 @@ persion.printGender();
             };
             ```
 
-### 6. Destructuring
+### 1.6. Destructuring
 
     - Easily extract array elements or objects properties and store then in variables.
     - Array Destructuring
@@ -138,7 +138,7 @@ persion.printGender();
         console.log(age); // undefined
         ```
 
-### 7. Reference and primitive type
+### 1.7. Reference and primitive type
 
     - **Not next-gen features but important one.**
     1. Primitive type
