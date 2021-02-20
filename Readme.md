@@ -1,5 +1,13 @@
 # React - Reacts to state changes
 
+1. Next-Gen JavaScript
+    - 1.1. `let and const`
+    - 1.2. ES6 Arrow functions
+    - 1.3. Exports and Imports
+    - 1.4. Classes, Properties, and Methods
+    - 1.5. Spread and Rest Operators
+    - 1.6. Destructuring
+    - 1.7. Reference and primitive type
 1. Introduction
     - 1.1. Setup
     - 1.2. Component
@@ -8,26 +16,157 @@
     - 1.5. Fetch data from API
     - 1.6. State in react: `useState`
     - 1.7. useEffect: built-in hook
-2. React Router
-3. State Management
+1. React Router
+1. State Management
     - 3.1. The need for State Management
     - 3.2. Setup for Context
     - 3.3. Usage of context
     - 3.4. Update value in the context
     - 3.5. Pros and Cons
-4. Redux - State management tool
+1. Redux - State management tool
     - 4.1. Theory
     - 4.2. How to Proceed with `redux` library
     - 4.3. How to Proceed with `react-redux` library
     - 4.4. How to access value from the store(Globalized state)
-5. From the scratch
+1. From the scratch
     - 5.1. Another way of using react
     - 5.2. JSX
     - 5.3. Small Quirks in JSX
     - 5.4. React Setup from scratch
-6. Resource
+1. Resource
 
-## 1. Intro
+## 1. Next-Gen JavaScript
+
+1. **`let and const`**
+2. **ES6 Arrow functions** - no more issues with **this** keyword
+3. **Exports and Imports**
+
+    - Default exports
+
+    ```js
+    // person.js
+    const person = {
+    	name: 'Saurabh',
+    };
+    export default person;
+    ```
+
+    - Named exports
+
+    ```js
+    // utility.js
+    export const clean = () => { ... }
+    export const baseData = 10;
+    ```
+
+    - Imports
+
+    ```js
+    // app.js
+    import person from './person.js';
+    import prs from './person.js';
+
+    import { baseData } from './utility.js';
+    import * as bundled from './utility.js';
+    import { clean as reset } from './utility.js';
+    ```
+
+4. **Classes, Properties, and Methods**
+
+```js
+class Human {
+	gender = 'female';
+	printGender = () => {
+		console.log(this.gender);
+	};
+}
+
+class Person extends Human {
+	name = 'Saurabh';
+	gender = 'male';
+	printName = () => {
+		console.log(this.name);
+	};
+}
+
+const person = new Person();
+persion.printName(person);
+persion.printGender();
+```
+
+5. **Spread and Rest Operators**
+
+    1. Spread
+
+        - `...` (three dots.)
+        - use to split up array elements OR object properties
+
+            ```js
+            const newArray = [...oldArray, 1, 2];
+            const newObject = [...oldObject, (newProp: 6)];
+            ```
+
+        - NOTE: if oldObject also have `newProp` property, it'll get overridden in newObject.
+
+    2. Rest
+
+        - `...` (three dots.) same as above
+        - use to merge a list of function arguments into an array
+
+            ```js
+            sortArgs = (...args) => {
+            	return args.sort();
+            };
+            ```
+
+6. **Destructuring**
+
+    - Easily extract array elements or objects properties and store then in variables.
+    - Array Destructuring
+        ```js
+        const names = ['Saurus', 'Zed', 'Ztrimus'];
+        [a, , c] = names;
+        console.log(a); // Saurus
+        console.log(c); // Ztrimus
+        ```
+    - Object Destructuring
+        ```js
+        {name} = {name:'Saurus', age: 23};
+        console.log(name); // Saurus
+        console.log(age); // undefined
+        ```
+
+7. **Reference and primitive type**
+    - **Not next-gen features but important one.**
+    1. Primitive type
+        - **Numbers, Strings, and Booleans** are primitive type.
+        - means, on assign 1stVariable to 2ndVariable, 1stVariable's value get copy in to 2ndVariable, **NOT reference**.
+        ```js
+        let num1 = 1;
+        let num2 = num1;
+        console.log(num1, num2); // {num1: 1, num2: 1}
+        num1 = 5;
+        console.log(num1, num2); // {num1: 5, num2: 1}
+        ```
+    2. Reference type
+        - **Object and Arrays** are reference type.
+        - means, on assign 1stObject to 2ndObject, javascript just copied pointer of 1stObject to 2ndObject and points to the exact same object in memory as 1stObject does.
+        - Same thing happen with arrays.
+            ```js
+            const person = { name: 'Saurus' };
+            const secondPerson = person;
+            person.name = 'Ztrimus';
+            console.log(secondPerson); // {name: 'Ztrimus'}
+            ```
+        - To avoid this behavior and copy into 2ndObject
+            ```js
+            const person = { name: 'Saurus' };
+            const secondPerson = { ...person };
+            person.name = 'Ztrimus';
+            console.log(secondPerson); // {name: 'Saurus'}
+            ```
+
+## 1. Introduction
 
 -   A javascript library for building user interfaces
 -   By Facebook 2011
