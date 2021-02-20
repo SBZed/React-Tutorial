@@ -1,41 +1,31 @@
 # React - Reacts to state changes
 
-## Index
-
-#### 1. Introduction
-
--   1.1. Setup
--   1.2. Component
--   1.3. First React App
--   1.4. Props (Passing Data to component)
--   1.5. Fetch data from API
--   1.6. State in react: `useState`
--   1.7. useEffect: built-in hook
-
-#### 2. React Router
-
-#### 3. State Management
-
--   3.1. The need for State Management
--   3.2. Setup for Context
--   3.3. Usage of context
--   3.4. Update value in the context
--   3.5. Pros and Cons
-
-#### 4. Redux - State management tool
-
--   4.1. Theory
--   4.2. How to Proceed with `redux` library
--   4.3. How to Proceed with `react-redux` library
--   4.4. How to access value from the store(Globalized state)
-
-#### 5. From the scratch
-
--   5.1. Another way of using react
--   5.2. JSX
--   5.3. Small Quirks in JSX
-
-#### 6. Resource
+1. Introduction
+    - 1.1. Setup
+    - 1.2. Component
+    - 1.3. First React App
+    - 1.4. Props (Passing Data to component)
+    - 1.5. Fetch data from API
+    - 1.6. State in react: `useState`
+    - 1.7. useEffect: built-in hook
+2. React Router
+3. State Management
+    - 3.1. The need for State Management
+    - 3.2. Setup for Context
+    - 3.3. Usage of context
+    - 3.4. Update value in the context
+    - 3.5. Pros and Cons
+4. Redux - State management tool
+    - 4.1. Theory
+    - 4.2. How to Proceed with `redux` library
+    - 4.3. How to Proceed with `react-redux` library
+    - 4.4. How to access value from the store(Globalized state)
+5. From the scratch
+    - 5.1. Another way of using react
+    - 5.2. JSX
+    - 5.3. Small Quirks in JSX
+    - 5.4. React Setup from scratch
+6. Resource
 
 ## 1. Intro
 
@@ -732,6 +722,134 @@ function App() {
 	<h1 className='text-dark'>Hello</h1>
 </div>
 ```
+
+### 5.4. React Setup from scratch
+
+-   create new folder.
+-   run `npm init -y`. This going to create `package.json`. you can do this for any new project (e.g. react project, angular, node apis project, server, for any other framework.)
+-   now install react and react-dom.
+
+```sh
+npm install react react-dom
+```
+
+-   `package-lock.json` basically locks the version of all the different packages that you have in project. Cause, packages are going to update and after time, you projects may be not compatible with packages that you updated.
+-   We need to also added babel to use JSX.
+
+```sh
+npm install @babel/core @babel/preset-env @babel/preset-react babel-loader
+```
+
+-   babel/core: basic package.
+-   babel/preset-env: allow to use modern javascript (es6, es7, ....) and automatically transplies to older javascript which work with older browsers.
+-   babel/preset-react: Allows you to take JSX code and turn it into vanilla react
+-   babel-coder: intermediary package the connect babel to webpack.
+-   webpack:
+    -   we have package install on our node_modules, web browser don't these packages. So, webpack takes our react code and all package/dependancis we are using and mix it, jumbles all those and push final javascript file contains everyting to make it work on all the browsers.
+    -   webpack takes your code and react code, combine it so you can serve it to the web. it's also added babel to transplies code, other thing to minfy.
+-   Now create **.babelrc** file, and add below code.
+
+```json
+{
+	"presets": ["@babel/preset-react", "@babel/preset-env"]
+}
+```
+
+-   now we need to addd webpack and connect babel to it.
+
+```sh
+npm install webpack webpack-cli webpack-dev-server
+```
+
+-   dev-server allows to use webpack in development environment.
+-   now create **wepack.config.js** file and insert below code.
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+module.exports = {
+	entry: './src/index.js',
+	output: {
+		filename: 'bundle.[hash].js',
+		path: path.resolve(__dirname, 'dist'),
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: './src/index.html',
+		}),
+	],
+	resolve: {
+		modules: [__dirname, 'src', 'node_modules'],
+		extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
+	},
+	module: {
+		rules: [
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				loader: require.resolve('babel-loader'),
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader'],
+			},
+			{
+				test: /\.png|svg|jpg|gif$/,
+				use: ['file-loader'],
+			},
+		],
+	},
+};
+```
+
+-   Create `src` folder. and then create Basic/root/App component `App.js` file in it. and put code in it.
+
+```js
+import React from 'react';
+
+const App = () => <div>Hello React</div>;
+
+export default App;
+```
+
+-   create `index.html` where whole react generated code renders. (trick: using emmet extension you can type `doc` and hit tab to automatically generate below code)
+
+```html
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>React</title>
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+</html>
+```
+
+-   create `index.js` file which entry point of application.
+
+```jsimport React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+```
+
+-   Now to start this application, we need to setup and run webpack. go to `package.json` and add below script in script object.
+
+```json
+{
+	"scripts": {
+		"start": "webpack-dev-server --hot --open",
+		"build": "webpack --config webpack.config.js --mode production"
+	}
+}
+```
+
+-   `--hot`: if we made changes, it automatically going to update itself.
+-   `--open`: automatically going to open application when server is ready.
 
 ## 9. Resource
 
