@@ -9,14 +9,15 @@
     - 1.6. Destructuring
     - 1.7. Reference and primitive type
 2. Introduction
-    - 1.1. Understanding base features and syntax
-    - 1.2. Setup
-    - 1.3. Component
-    - 1.4. First React App
-    - 1.5. Props (Passing Data to component)
-    - 1.6. Fetch data from API
-    - 1.7. State in react: `useState`
-    - 1.8. useEffect: built-in hook
+    - 2.1. Understanding base features and syntax
+    - 2.2. Setup
+    - 2.3. Component
+    - 2.4. First React App
+    - 2.5. Props (Passing Data to component)
+    - 2.6. State in react
+    - 2.7. Fetch data from API
+    - 2.8. useEffect: built-in hook
+    - 2.9. Stateless vs Stateful component
 3. React Router
 4. State Management
     - 3.1. The need for State Management
@@ -46,35 +47,35 @@
 
 ### 1.3. Exports and Imports
 
-    - Default exports
+-   Default exports
 
-    ```js
-    // person.js
-    const person = {
-    	name: 'Saurabh',
-    };
-    export default person;
-    ```
+```js
+// person.js
+const person = {
+	name: 'Saurabh',
+};
+export default person;
+```
 
-    - Named exports
+-   Named exports
 
-    ```js
-    // utility.js
-    export const clean = () => { ... }
-    export const baseData = 10;
-    ```
+```js
+// utility.js
+export const clean = () => { ... }
+export const baseData = 10;
+```
 
-    - Imports
+-   Imports
 
-    ```js
-    // app.js
-    import person from './person.js';
-    import prs from './person.js';
+```js
+// app.js
+import person from './person.js';
+import prs from './person.js';
 
-    import { baseData } from './utility.js';
-    import * as bundled from './utility.js';
-    import { clean as reset } from './utility.js';
-    ```
+import { baseData } from './utility.js';
+import * as bundled from './utility.js';
+import { clean as reset } from './utility.js';
+```
 
 ### 1.4. Classes, Properties, and Methods
 
@@ -101,76 +102,79 @@ persion.printGender();
 
 ### 1.5. Spread and Rest Operators
 
-    1. Spread
+1. Spread
 
-        - `...` (three dots.)
-        - use to split up array elements OR object properties
+-   `...` (three dots.)
+-   use to split up array elements OR object properties
 
-            ```js
-            const newArray = [...oldArray, 1, 2];
-            const newObject = [...oldObject, (newProp: 6)];
-            ```
+    ```js
+    const newArray = [...oldArray, 1, 2];
+    const newObject = [...oldObject, (newProp: 6)];
+    ```
 
-        - NOTE: if oldObject also have `newProp` property, it'll get overridden in newObject.
+-   NOTE: if oldObject also have `newProp` property, it'll get overridden in newObject.
 
-    2. Rest
+2. Rest
 
-        - `...` (three dots.) same as above
-        - use to merge a list of function arguments into an array
+-   `...` (three dots.) same as above
+-   use to merge a list of function arguments into an array
 
-            ```js
-            sortArgs = (...args) => {
-            	return args.sort();
-            };
-            ```
+    ```js
+    sortArgs = (...args) => {
+    	return args.sort();
+    };
+    ```
 
 ### 1.6. Destructuring
 
-    - Easily extract array elements or objects properties and store then in variables.
-    - Array Destructuring
-        ```js
-        const names = ['Saurus', 'Zed', 'Ztrimus'];
-        [a, , c] = names;
-        console.log(a); // Saurus
-        console.log(c); // Ztrimus
-        ```
-    - Object Destructuring
-        ```js
-        {name} = {name:'Saurus', age: 23};
-        console.log(name); // Saurus
-        console.log(age); // undefined
-        ```
+-   Easily extract array elements or objects properties and store then in variables.
+-   Array Destructuring
+    ```js
+    const names = ['Saurus', 'Zed', 'Ztrimus'];
+    [a, , c] = names;
+    console.log(a); // Saurus
+    console.log(c); // Ztrimus
+    ```
+-   Object Destructuring
+    ```js
+    {name} = {name:'Saurus', age: 23};
+    console.log(name); // Saurus
+    console.log(age); // undefined
+    ```
 
 ### 1.7. Reference and primitive type
 
-    - **Not next-gen features but important one.**
-    1. Primitive type
-        - **Numbers, Strings, and Booleans** are primitive type.
-        - means, on assign 1stVariable to 2ndVariable, 1stVariable's value get copy in to 2ndVariable, **NOT reference**.
-        ```js
+-   **Not next-gen features but important one.**
+
+1. Primitive type
+
+    - **Numbers, Strings, and Booleans** are primitive type.
+    - means, on assign 1stVariable to 2ndVariable, 1stVariable's value get copy in to 2ndVariable, **NOT reference**.
+        ```jsx
         let num1 = 1;
         let num2 = num1;
         console.log(num1, num2); // {num1: 1, num2: 1}
         num1 = 5;
         console.log(num1, num2); // {num1: 5, num2: 1}
         ```
-    2. Reference type
-        - **Object and Arrays** are reference type.
-        - means, on assign 1stObject to 2ndObject, javascript just copied pointer of 1stObject to 2ndObject and points to the exact same object in memory as 1stObject does.
-        - Same thing happen with arrays.
-            ```js
-            const person = { name: 'Saurus' };
-            const secondPerson = person;
-            person.name = 'Ztrimus';
-            console.log(secondPerson); // {name: 'Ztrimus'}
-            ```
-        - To avoid this behavior and copy into 2ndObject
-            ```js
-            const person = { name: 'Saurus' };
-            const secondPerson = { ...person };
-            person.name = 'Ztrimus';
-            console.log(secondPerson); // {name: 'Saurus'}
-            ```
+
+2. Reference type
+    - **Object and Arrays** are reference type.
+    - means, on assign 1stObject to 2ndObject, javascript just copied pointer of 1stObject to 2ndObject and points to the exact same object in memory as 1stObject does.
+    - Same thing happen with arrays.
+        ```js
+        const person = { name: 'Saurus' };
+        const secondPerson = person;
+        person.name = 'Ztrimus';
+        console.log(secondPerson); // {name: 'Ztrimus'}
+        ```
+    - To avoid this behavior and copy into 2ndObject
+        ```js
+        const person = { name: 'Saurus' };
+        const secondPerson = { ...person };
+        person.name = 'Ztrimus';
+        console.log(secondPerson); // {name: 'Saurus'}
+        ```
 
 ## 1. Introduction
 
@@ -286,7 +290,10 @@ B --> C[Plain JavaScript]
 
 ### 1.5. Props (Passing Data to component)
 
+-   `props` and `state` are CORE concepts of react. Actually only changes in `props` and/or `state` trigger react to re-render your components and potentially update the DOM in the browser.
+-   props allow you to pass data from a parent (wrapping) component to child (embedded) component.
 -   In `App.js`.
+-   **React re-render UI only when props or state get changed.**
 
 ```jsx
 import React from 'react';
@@ -315,6 +322,7 @@ export default App;
 -   In child elements `Recipe.js`
 
 ```jsx
+// Recipe.js
 import React from 'react';
 
 const Recipe = ({ title, calories, image, ingredients }) => {
@@ -335,7 +343,176 @@ const Recipe = ({ title, calories, image, ingredients }) => {
 export default Recipe;
 ```
 
-### 1.6. Fetch data from API
+-   For class based component.
+
+```jsx
+// Recipe.js
+import React, { Component } from 'react';
+
+class Person extends Component {
+	render() {
+		return (
+			<div>
+				<h1>{this.props.title}</h1>
+				<ol>
+					{this.props.ingredients.map((ingredient) => (
+						<li>{ingredient}</li>
+					))}
+				</ol>
+				<p>{this.props.calories}</p>
+				<img src={this.props.image} alt='' />
+			</div>
+		);
+	}
+}
+
+export default Person;
+```
+
+### 1.6. State in react
+
+-   State is used to change the component, well, state from within. changes to state also trigger an UI update.
+
+#### **1. Classed based components.**
+
+```jsx
+class NewPost extends Component {
+	state = {
+		counter: 1,
+		otherState: "other value"
+	}
+
+	const increaseCounter = () => {
+		this.setState({
+			counter: counter+1
+		})
+	}
+
+	render() {
+		<>
+		<div>{this.state.counter}</div>
+		<button onClick={increaseCounter}>
+			increase counter
+		</button>
+		</>
+	}
+}
+```
+
+#### 2. `useState` hook
+
+```jsx
+import React, { useEffect, useState } from 'react';
+
+const app = (props) => {
+	// define state
+	const [search, setSearch] = useState('');
+
+	// change value of state
+	const updateSearch = (e) => {
+		setSearch(e.target.value);
+	};
+
+	// usage of state
+	return (
+		<div className='App'>
+			<input className='search-bar' type='text' value={search} onChange={updateSearch} />
+			<button className='search-button' type='submit'>
+				Search
+			</button>
+		</div>
+	);
+};
+
+export default app;
+```
+
+#### 3. Difference between useState and classed based state
+
+-   In classed based state, when you change one property, other properties dosen't get updated.
+
+    ```jsx
+    class NewPost extends Component {
+    	state = {
+    		counter: 1,
+    		otherState: 'other value',
+    	};
+    	console.log(this.state);
+    	// Output ----
+    	// state = {
+    	//	counter: 1,
+    	//	otherState: 'other value',
+    	// };
+
+    	const increaseCounter = () => {
+    		this.setState({
+    			counter: counter + 1,
+    		});
+    		console.log(this.state);
+    		// Output ----
+    		// state = {
+    		//	counter: 2,
+    		//	otherState: 'other value',
+    		// };
+    	};
+
+
+    	render() {
+    		<>
+    		<div>{this.state.counter}</div>
+    		<button onClick={this.increaseCounter}>
+    			increase counter
+    		</button>
+    		</>
+    	}
+    }
+    ```
+
+-   like when you changes `counter` from state, `otherState` don't get change
+-   But when you're using React hooks, second element in that useState does not merge whatever you pass to it with the old state.
+    instead it replaces the old state with it and this means that whenever you're updating the state like this, you have to manually make sure you include all old state data.
+
+```jsx
+import React, { useState } from 'react';
+
+const NewPost = () => {
+	const [counterState, setCounterState] = useState({
+		counter: 1,
+		otherState: 'other value',
+	});
+	console.log(counterState);
+	// Output ----
+	// counterState = {
+	//	counter: 1,
+	//	otherState: 'other value',
+	// };
+
+	const increaseCounter = () => {
+		setCounterState({
+			counter: counter + 1,
+		});
+		console.log(counterState);
+		// Output ----
+		// counterState = {
+		//	counter: 2
+		// };
+	};
+
+
+	render() {
+		<>
+		<div>{counterState.counter}</div>
+		<button onClick={increaseCounter}>
+			increase counter
+		</button>
+		</>
+	}
+}
+
+export default NewPost;
+```
+
+### 1.7. Fetch data from API
 
 ```jsx
 function App() {
@@ -356,34 +533,6 @@ function App() {
 		setRecipes(data);
 	};
 }
-```
-
-### 1.7. State in react: useState
-
-```jsx
-import React, { useEffect, useState } from 'react';
-
-function App() {
-	// define state
-	const [search, setSearch] = useState('');
-
-	// change value of state
-	const updateSearch = (e) => {
-		setSearch(e.target.value);
-	};
-
-	// usage of state
-	return (
-		<div className='App'>
-			<input className='search-bar' type='text' value={search} onChange={updateSearch} />
-			<button className='search-button' type='submit'>
-				Search
-			</button>
-		</div>
-	);
-}
-
-export default App;
 ```
 
 ### 1.8. useEffect: built-in hook
@@ -413,6 +562,20 @@ useEffect(() => {
 	console.log('Effect has been run');
 }, [counter]);
 ```
+
+### 2.9. Stateless vs Stateful component
+
+#### 2.9.1. Stateful
+
+-   Components which have classed based state or useState hooks.
+-   Also called **Smart / Container** component.
+-   **Good pratice** to use few/couple of these stateful components as possible. (Coz it make your app easy to contain and manage)
+
+#### 2.9.2. Stateless
+
+-   component which don't have any state.
+-   Also called **Dumb / Presentational** Component.
+-   **Good pratice** to use as many of these stateless components as possible.
 
 ## 2. React Router
 
