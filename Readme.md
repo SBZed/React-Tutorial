@@ -1,41 +1,41 @@
 # React - Reacts to state changes
 
-1. Next-Gen JavaScript
-    - 1.1. `let and const`
-    - 1.2. ES6 Arrow functions
-    - 1.3. Exports and Imports
-    - 1.4. Classes, Properties, and Methods
-    - 1.5. Spread and Rest Operators
-    - 1.6. Destructuring
-    - 1.7. Reference and primitive type
-2. Introduction
-    - 2.1. Understanding base features and syntax
-    - 2.2. Setup
-    - 2.3. Component
-    - 2.4. First React App
-    - 2.5. Props (Passing Data to component)
-    - 2.6. State in react
-    - 2.7. Fetch data from API
-    - 2.8. useEffect: built-in hook
-    - 2.9. Stateless vs Stateful component
-3. React Router
-4. State Management
-    - 3.1. The need for State Management
-    - 3.2. Setup for Context
-    - 3.3. Usage of context
-    - 3.4. Update value in the context
-    - 3.5. Pros and Cons
-5. Redux - State management tool
-    - 4.1. Theory
-    - 4.2. How to Proceed with `redux` library
-    - 4.3. How to Proceed with `react-redux` library
-    - 4.4. How to access value from the store(Globalized state)
-6. From the scratch
-    - 5.1. Another way of using react
-    - 5.2. JSX
-    - 5.3. Small Quirks in JSX
-    - 5.4. React Setup from scratch
-7. Resource
+1. [Next Gen JavaScript](#1-next-gen-javascript)
+    - [1.1. let and const](#11-let-and-const)
+    - [1.2. ES6 Arrow functions](#12-es6-arrow-functions)
+    - [1.3. Exports and Imports](#13-exports-and-imports)
+    - [1.4. Classes, Properties, and Methods](#14-classes-properties-and-methods)
+    - [1.5. Spread and Rest Operators](#15-spread-and-rest-operators)
+    - [1.6. Destructuring](#16-destructuring)
+    - [1.7. Reference and primitive type](#17-reference-and-primitive-type)
+2. [Introduction](#2-introduction)
+    - [2.1. Understanding base features and syntax](#21-understanding-base-features-and-syntax)
+    - [2.2. Setup](#22-setup)
+    - [2.3. Component](#23-component)
+    - [2.4. First React App](#24-first-react-app)
+    - [2.5. Props (Passing Data to component)](#25-props-passing-data-to-component)
+    - [2.6. State in react](#26-state-in-react)
+    - [2.7. Fetch data from API](#27-fetch-data-from-api)
+    - [2.8. useEffect: builtin hook](#28-useeffect-builtin-hook)
+    - [2.9. Stateless vs Stateful component](#29-stateless-vs-stateful-component)
+3. [React Router](#3-react-router)
+4. [State Management](#4-state-management)
+    - [4.1. The need for State Management](#41-the-need-for-state-management)
+    - [4.2. Setup for Context](#42-setup-for-context)
+    - [4.3. Usage of context](#43-usage-of-context)
+    - [4.4. Update value in the context](#44-update-value-in-the-context)
+    - [4.5. Pros and Cons](#45-pros-and-cons)
+5. [Redux - State management tool](#5-redux--state-management-tool)
+    - [5.1. Theory](#51-theory)
+    - [5.2. How to Proceed with redux library](#52-how-to-proceed-with-redux-library)
+    - [5.3. How to Proceed with react-redux library](#53-how-to-proceed-with-reactredux-library)
+    - [5.4. How to access value from the store (Globalized state)](#54-how-to-access-value-from-the-store-globalized-state)
+6. [From the scratch](#6-from-the-scratch)
+    - [6.1. Another way of using react](#61-another-way-of-using-react)
+    - [6.2. JSX](#62-jsx)
+    - [6.3. Small Quirks in JSX](#63-small-quirks-in-jsx)
+    - [6.4. React Setup from scratch](#64-react-setup-from-scratch)
+7. [Resource](#7-resource)
 
 ## 1. Next-Gen JavaScript
 
@@ -176,7 +176,7 @@ persion.printGender();
         console.log(secondPerson); // {name: 'Saurus'}
         ```
 
-## 1. Introduction
+## 2. Introduction
 
 -   A javascript library for building user interfaces
 -   By Facebook 2011
@@ -189,28 +189,28 @@ persion.printGender();
     -   Routing
     -   calling HTTP services, etc.
 
-### 1.1. Understanding base features and syntax
+### 2.1. Understanding base features and syntax
 
 -   We need a more elaborate workflow for real projects, like:
 
-    1.  Dependency management (npm or yarn)
-    2.  Bundler (Webpack)
-    3.  Compiler (Babel + preset)
-    4.  Development server
+    2.  Dependency management (npm or yarn)
+    3.  Bundler (Webpack)
+    4.  Compiler (Babel + preset)
+    5.  Development server
 
 -   we can use `create-react-app` plugin for creating project with workflow mentained above.
 
 ```cmd
->>> create-react-app react-complete-guide --scripts-version 1.1.5
+>>> create-react-app react-complete-guide --scripts-version 2.1.5
 ```
 
-### 1.2. Setup
+### 2.2. Setup
 
 -   install nodeJs.
 -   then install create-react-app `npm i -g create-react-app`
 -   Id using VS Code, install `Simple React Snippets` extension.
 
-### 1.3. Component
+### 2.3. Component
 
 -   Component basically contain `state` and `render()` method.
 -   Each component is the function that contains JS and JSX(like HTML).
@@ -236,7 +236,7 @@ class Tweet {
 }
 ```
 
-### 1.4. First React App
+### 2.4. First React App
 
 -   create app
     ```sh
@@ -288,7 +288,7 @@ A[JavaScript XML] --> B((Babel))
 B --> C[Plain JavaScript]
 ```
 
-### 1.5. Props (Passing Data to component)
+### 2.5. Props (Passing Data to component)
 
 -   `props` and `state` are CORE concepts of react. Actually only changes in `props` and/or `state` trigger react to re-render your components and potentially update the DOM in the browser.
 -   props allow you to pass data from a parent (wrapping) component to child (embedded) component.
@@ -369,7 +369,7 @@ class Person extends Component {
 export default Person;
 ```
 
-### 1.6. State in react
+### 2.6. State in react
 
 -   State is used to change the component, well, state from within. changes to state also trigger an UI update.
 
@@ -512,7 +512,7 @@ const NewPost = () => {
 export default NewPost;
 ```
 
-### 1.7. Fetch data from API
+### 2.7. Fetch data from API
 
 ```jsx
 function App() {
@@ -535,7 +535,7 @@ function App() {
 }
 ```
 
-### 1.8. useEffect: built-in hook
+### 2.8. useEffect: built-in hook
 
 -   By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed (we'll refer to it as our “effect”), and call it later after performing the DOM updates.
 
