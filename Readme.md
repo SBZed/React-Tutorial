@@ -535,7 +535,7 @@ function App() {
 }
 ```
 
-### 2.8. useEffect: built-in hook
+### 2.8. useEffect: builtin hook
 
 -   By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed (we'll refer to it as our “effect”), and call it later after performing the DOM updates.
 
@@ -584,7 +584,39 @@ useEffect(() => {
 -   So if anyone, including yourself, ever needs to change something about the app, it's clear where to make that change.
 -   If every component in your app manages its own state, you quickly end up with spaghetti code where everyone is doing everything and that can make your app very hard to reuse, to maintain and so on. So have as many pure functional presentational components as possible and only use state.
 
-## 2. React Router
+### 2.10. Passing method references between components
+
+```js
+// Wrong
+<button onClick={this.switchNameHandler()}>Switch Name</button>
+```
+
+-   When you apply parentheses to `switchNameHandler` method references in `onClick`. It get immediatly called. don't wait for onClick event. So avoid parentheses.
+
+```js
+// Right
+<button onClick={this.switchNameHandler}>Switch Name</button>
+```
+
+-   When you need to pass arguments, we have two methods:
+
+#### 2.10.1 By using Bind
+
+-   It's better pratice to pass method references **using Bind**.
+
+```js
+<button onClick={this.switchNameHandler.bind(this, 'ReferencCallBind')}>Switch Name</button>
+```
+
+#### 2.10.2 By using Arrow Function
+
+-   convenient syntax but it can be inefficient, reaxt can re-render certain things to often.
+
+```js
+<button onClick={() => this.switchNameHandler('Saurabh New Call')}>Switch Name</button>
+```
+
+## 3. React Router
 
 ```bash
 npm install react-router-dom
