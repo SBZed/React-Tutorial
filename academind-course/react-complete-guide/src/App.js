@@ -1,40 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const app = (props) => {
-	const [personsState, SetPersonsState] = useState({
+class App extends React.Component {
+	state = {
 		person: [
 			{ name: 'Saurus', age: 22 },
 			{ name: 'Ztrimus', age: '23' },
 			{ name: 'Cyrus', age: '24' },
 		],
 		Othet: 'asfsfasfasfas',
-	});
+	};
 
-	const switchNameHandler = () => {
+	switchNameHandler = (newName) => {
 		//DONT'T DO THIS: personsState.person[0].name = 'Saurabh';
-		SetPersonsState({
+		this.setState({
 			person: [
-				{ name: 'Saurabh', age: 22 },
+				{ name: newName, age: 22 },
 				{ name: 'Ztrimus', age: 23 },
 				{ name: 'Cyrus', age: 34567 },
 			],
-			otherState: 'Saurbah zinjad',
 		});
 	};
 
-	return (
-		<div className='App'>
-			<h1>I'm React App</h1>
-			<button onClick={switchNameHandler}>Switch Name</button>
-			<Person name={personsState.person[0].name} age={personsState.person[0].age} />
-			<Person name={personsState.person[1].name} age={personsState.person[1].age}>
-				My hoopies is dance
-			</Person>
-			<Person name={personsState.person[2].name} age={personsState.person[2].age} />
-		</div>
-	);
-};
+	render() {
+		return (
+			<div className='App'>
+				<h1>I'm React App</h1>
+				<button onClick={() => this.switchNameHandler('Saurabh New Call')}>
+					Switch Name
+				</button>
+				<Person name={this.state.person[0].name} age={this.state.person[0].age} />
+				<Person
+					name={this.state.person[1].name}
+					age={this.state.person[1].age}
+					clickMyMan={this.switchNameHandler.bind(this, 'ReferencCallBind')}
+				>
+					My hoopies is dance
+				</Person>
+				<Person name={this.state.person[2].name} age={this.state.person[2].age} />
+			</div>
+		);
+	}
+}
 
-export default app;
+export default App;

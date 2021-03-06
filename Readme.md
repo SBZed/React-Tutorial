@@ -565,17 +565,24 @@ useEffect(() => {
 
 ### 2.9. Stateless vs Stateful component
 
-#### 2.9.1. Stateful
+#### 2.9.1. **Stateful**
 
 -   Components which have classed based state or useState hooks.
 -   Also called **Smart / Container** component.
--   **Good pratice** to use few/couple of these stateful components as possible. (Coz it make your app easy to contain and manage)
+-   **Good pratice** to use few/couple of these stateful components as possible.
 
-#### 2.9.2. Stateless
+#### 2.9.2. **Stateless**
 
 -   component which don't have any state.
 -   Also called **Dumb / Presentational** Component.
 -   **Good pratice** to use as many of these stateless components as possible.
+
+#### 2.9.3. **Why prefer Stateless over Stateful**
+
+-   The idea is that you restrict yourself to a setup where you have way more functional presentational components than stateful components. Now why?
+-   Because this makes your app easier to maintain and manage. You have a clear flow of data and it's very clear where your main logic sits and where your data changes and then is distributed to the rest of your app.
+-   So if anyone, including yourself, ever needs to change something about the app, it's clear where to make that change.
+-   If every component in your app manages its own state, you quickly end up with spaghetti code where everyone is doing everything and that can make your app very hard to reuse, to maintain and so on. So have as many pure functional presentational components as possible and only use state.
 
 ## 2. React Router
 
