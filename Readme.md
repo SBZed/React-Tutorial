@@ -25,7 +25,7 @@
     - [4.3. Usage of context](#43-usage-of-context)
     - [4.4. Update value in the context](#44-update-value-in-the-context)
     - [4.5. Pros and Cons](#45-pros-and-cons)
-5. [Redux - State management tool](#5-redux--state-management-tool)
+5. [Redux - State management tool](#5-redux-state-management-tool)
     - [5.1. Theory](#51-theory)
     - [5.2. How to Proceed with redux library](#52-how-to-proceed-with-redux-library)
     - [5.3. How to Proceed with react-redux library](#53-how-to-proceed-with-reactredux-library)
@@ -673,9 +673,9 @@ function Nav() {
 }
 ```
 
-## 3. State Management
+## 4. State Management
 
-### 3.1. The need for State Management
+### 4.1. The need for State Management
 
 ```jsx
 <div className='App'>
@@ -687,7 +687,7 @@ function Nav() {
 -   Using prop you can only pass down value through the component, but what if you need the same data in an adjacent component. like movieList data from `MovieList` component needs into `Nav` component.
 -   this is where **State management** comes into the picture.
 
-### 3.2. Setup for Context
+### 4.2. Setup for Context
 
 -   We start with creating a context file e.g. `MovieContext.js` which contains all movies data
 
@@ -717,7 +717,7 @@ export const MovieProvider = (props) => {
 -   And we need to wrap this `MovieProvider` around all the components that we want to give that ability to access that state.
 -   `props.children` render all component that wrap around `<MovieContext.Provider>` attribute. e.g.
 
-### 3.3. Usage of context
+### 4.3. Usage of context
 
 ```jsx
 import { MovieProvider } from './MovieContext';
@@ -738,7 +738,7 @@ function App() {
 
 -   here as you can see, Navbar, add-movie, and movie listings components need movie data.
 
-### 3.4. Update value in context
+### 4.4. Update value in context
 
 -   For now, we use centralized data in MovieContext. now how to change and update it.
 -   let say we need to add movies in MovieContext.
@@ -778,17 +778,17 @@ const AddMovie = () => {
 export default AddMovie;
 ```
 
-### 3.5. Pros and Cons:
+### 4.5. Pros and Cons:
 
 -   **Pros**: It's really good if we want to just render out information.
 -   **Cons**: If we can change data in context, the problem is every time we update the code in our useContext, all components are going to re-render.
 
-#### 4. Redux - State management tool
+## 5. Redux - State management tool
 
 -   `redux`: actual state management package.
 -   `react redux`: gives us the ability to connect react and redux.
 
-### 4.1. Theory
+### 5.1. Theory
 
 -   There are 7 things we need to understand:
 
@@ -802,7 +802,7 @@ export default AddMovie;
 
 -   **Keywords**: View, Action, Type, dispatch, Reducer, Provider, store, combinedReducer, thunk, enhancer, connect, mapStateToProps, PropTypes, React Life Cycle function
 
-### 4.2. How to Proceed with `redux` library
+### 5.2. How to Proceed with `redux` library
 
 -   Step 1. create action, it is a function that returns an object.
 
@@ -872,7 +872,7 @@ store.dispatch(decrement());
 store.dispatch(decrement());
 ```
 
-### 4.3. How to Proceed with `react-redux` library
+### 5.3. How to Proceed with `react-redux` library
 
 -   create a separate folder for all reducers. same for actions.
 -   write down all reducer code in a new file.`src\reducers\counter.js`
@@ -944,7 +944,7 @@ ReactDOM.render(
 );
 ```
 
-### 4.4. How to access value from the store(Globalized state)
+### 5.4. How to access value from the store(Globalized state)
 
 -   first, create actions in `src\actions\index.js`
 
