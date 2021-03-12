@@ -5,31 +5,29 @@ import Person from './Person/Person';
 class App extends React.Component {
 	state = {
 		person: [
-			{ name: 'Saurus', age: 22 },
-			{ name: 'Ztrimus', age: '23' },
-			{ name: 'Cyrus', age: '24' },
+			{ id: 'asda1', name: 'Saurus', age: 22 },
+			{ id: 'asda2', name: 'Ztrimus', age: '23' },
+			{ id: 'asda3', name: 'Cyrus', age: '24' },
 		],
+		showPersons: false,
 		Othet: 'asfsfasfasfas',
 	};
 
-	switchNameHandler = (newName) => {
-		//DONT'T DO THIS: personsState.person[0].name = 'Saurabh';
-		this.setState({
-			person: [
-				{ name: newName, age: 22 },
-				{ name: 'Ztrimus', age: 23 },
-				{ name: 'Cyrus', age: 34567 },
-			],
-		});
+	deletePersonHandler = (personIndex) => {
+		const persons = [...this.state.person];
+		persons.splice(personIndex, 1);
+		this.setState({ person: persons });
 	};
 
-	nameChangedHandler = (event) => {
+	nameChangedHandler = (event, id) => {
+		const persons = [...this.state.person];
+		persons.find((d) => d.id === id).name = event.target.value;
+		this.setState({ person: persons });
+	};
+
+	togglePersonsHandler = () => {
 		this.setState({
-			person: [
-				{ name: 'Saurabh', age: 22 },
-				{ name: event.target.value, age: 23 },
-				{ name: 'Cyrus', age: 34567 },
-			],
+			showPersons: !this.state.showPersons,
 		});
 	};
 
@@ -42,22 +40,31 @@ class App extends React.Component {
 			padding: '8px',
 			cursor: 'pointer',
 		};
+		let persons = null;
+		if (this.state.showPersons) {
+			persons = (
+				<div>
+					{this.state.person.map((person, index) => {
+						return (
+							<Person
+								name={person.name}
+								age={person.age}
+								click={() => this.deletePersonHandler(index)}
+								key={person.id}
+								changed={(event) => this.nameChangedHandler(event, person.id)}
+							/>
+						);
+					})}
+				</div>
+			);
+		}
 		return (
 			<div className='App'>
 				<h1>I'm React App</h1>
-				<button style={style} onClick={() => this.switchNameHandler('Saurabh New Call')}>
-					Switch Name
+				<button style={style} onClick={this.togglePersonsHandler}>
+					Toggle Persons
 				</button>
-				<Person name={this.state.person[0].name} age={this.state.person[0].age} />
-				<Person
-					name={this.state.person[1].name}
-					age={this.state.person[1].age}
-					changed={this.nameChangedHandler}
-					clickMyMan={this.switchNameHandler.bind(this, 'ReferencCallBind')}
-				>
-					My hoopies is dance
-				</Person>
-				<Person name={this.state.person[2].name} age={this.state.person[2].age} />
+				{persons}
 			</div>
 		);
 	}
