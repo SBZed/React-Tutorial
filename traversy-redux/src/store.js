@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
+// we don't need to added "./reducers/index". cuase webpack automatically gonna look at index.js file.
 
 const initialize = {};
 const middleware = [thunk];

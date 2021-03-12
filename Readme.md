@@ -790,11 +790,17 @@ export default AddMovie;
 
 ### 4.1. Theory
 
--   There are 4 things we need to understand:
-    1.  `STORE`: It's a globalized state. All state data exist in the isolated object called "STORE".
-    2.  `ACTION`: It describes what you want to do with the store.
-    3.  `REDUCER`: describes how your action transforms the state into the next state. Basically, on the call of a certain action, the reducer check which action gets called and according to that it modifies the state
-    4.  `DISPATCH`: here we execute our actions. "Like dispatch 'specificAction' to 'specificReducer'"
+-   There are 7 things we need to understand:
+
+    1.  `STORE`: It's a globalized state. All state data exist in the isolated object called "STORE". store holds the whole state tree of your application. The **only way to change** the **state** inside it is **dispatch an action** on it.
+    2.  `ACTION`: It describes what you want to do with the store. get called when you want to perform some operation/ function.
+    3.  `REDUCER`: describes how your action transforms the state into the next state. Basically, on the call of a certain action, the reducer check which action gets called and according to that it modifies the state. Evaluate any actions that are comitted.
+    4.  `DISPATCH`: Here we execute our actions. "Like dispatch 'specificAction' to 'specificReducer'"
+    5.  `Provider`: Glue between react and redux. Provider take store as props.
+    6.  `connect`: connect your component to redux store.
+    7.  `mapStateToProps`: Get state from redux and map it to properties to component.
+
+-   **Keywords**: View, Action, Type, dispatch, Reducer, Provider, store, combinedReducer, thunk, enhancer, connect, mapStateToProps, PropTypes, React Life Cycle function
 
 ### 4.2. How to Proceed with `redux` library
 
@@ -903,14 +909,23 @@ export default allReducers;
 -   Then import all reducer in `src\index.js`.
 
 ```jsx
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import allReducers from './reducers';
 // we don't need to added "./reducers/index". cuase webpack automatically gonna look at index.js file.
 
+const initialize = {};
+const middleware = [thunk];
 const store = createStore(
 	allReducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	initialize,
+	compose(
+		applyMiddleware(...middleware),
+		window__REDUX_DEVTOOLS_EXTENSION__ && window__REDUX_DEVTOOLS_EXTENSION__()
+	)
 );
+
+export default store;
 ```
 
 -   `window.__REDUX_DEVTOOLS_EXTENSION__`: this is for checking values for different states in the chrome dev tool.
